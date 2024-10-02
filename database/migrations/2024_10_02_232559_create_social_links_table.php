@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('social_links', function (Blueprint $table) {
             $table->id();
-            $table->string('nom');
-            $table->string('prenom');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->string('profile_image')->nullable();
-            $table->rememberToken();
+            $table->foreignId('profile_id')->constrained()->onDelete('cascade');
+            $table->string('platform'); // ex: LinkedIn, Instagram
+            $table->string('url'); // Lien vers le réseau social
             $table->timestamps();
         });
     }
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('social_links');
     }
 };
