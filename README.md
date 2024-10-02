@@ -23,12 +23,13 @@ E-Profile est une application web open source permettant aux professionnels de c
 
 1. **Cloner le dépôt** :
     ```bash
-    git clone https://github.com/ton-utilisateur/e-profile.git
-    cd e-profile
+    git clone https://github.com/sokevinjonas/api-e-profile-app.git
+    cd api-e-profile-app
     ```
 2. **Installer les dépendances PHP** :
 
-    ```composer install
+    ```bash
+    composer install
 
     ```
 
@@ -53,6 +54,7 @@ E-Profile est une application web open source permettant aux professionnels de c
         DB_PASSWORD=
     ```
 6. **Exécuter les migrations**:
-    ```
-    php artisan migrate
+
+    ```php artisan migrate
+
     ```
