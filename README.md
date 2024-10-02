@@ -35,18 +35,21 @@ E-Profile est une application web open source permettant aux professionnels de c
 
 3. **Copier le fichier .env.example vers .env et configurer la base de données** :
 
-    ```cp .env.example .env
+    ```bash
+    cp .env.example .env
 
     ```
 
 4. **Générer la clé de l'application** :
 
-    ```cp .env.example .env
+    ```bash
+    cp .env.example .env
 
     ```
 
 5. **Configurer la base de données dans le fichier .env** :
-    ```DB_CONNECTION=mysql
+    ```bash
+    DB_CONNECTION=mysql
         DB_HOST=127.0.0.1
         DB_PORT=3306
         DB_DATABASE=e_profile_db
@@ -55,6 +58,22 @@ E-Profile est une application web open source permettant aux professionnels de c
     ```
 6. **Exécuter les migrations**:
 
-    ```php artisan migrate
+    ```bash
+    php artisan migrate
 
     ```
+
+## Utilisation
+
+Une fois l'application démarrée, vous pouvez accéder aux endpoints API via http://localhost:8000/api. Vous pouvez vous inscrire, créer un profil, ajouter des services et gérer vos liens sociaux via les endpoints disponibles.
+
+### Exemples d'API :
+
+    GET /api/profile : Récupérer le profil de l'utilisateur connecté.
+    POST /api/profile : Créer ou mettre à jour le profil.
+    POST /api/profile/services : Ajouter un service.
+    POST /api/profile/social-links : Ajouter un lien social.
+
+### Contribution
+
+E-Profile est un projet open source, et toutes les contributions sont les bienvenues ! Que ce soit pour corriger un bug, ajouter une fonctionnalité ou améliorer la documentation, n'hésitez pas à faire un pull request.
