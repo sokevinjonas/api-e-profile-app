@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('profile_id')->constrained()->onDelete('cascade');
             $table->string('titre');
-            $table->text('description')->nullable();
             $table->integer('price')->nullable(); // Stocke le prix en FCFA, uniquement des entiers
             $table->timestamps();
         });

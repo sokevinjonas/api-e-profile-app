@@ -7,7 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SocialLinkController;
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware('jwt')->group(function () {
     // Deconnexion
     Route::post('/logout', [AuthController::class, 'logout']);
 
@@ -22,8 +22,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/profile/social-links/{id}', [SocialLinkController::class, 'destroy']);
 
     // Services
-    Route::post('/profile/services', [ServiceController::class, 'store']);
-    Route::delete('/profile/services/{id}', [ServiceController::class, 'destroy']);
+    Route::post('/services', [ServiceController::class, 'store']);
+    Route::delete('/services/{id}', [ServiceController::class, 'destroy']);
 });
 
 
