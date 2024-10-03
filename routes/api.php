@@ -8,6 +8,9 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SocialLinkController;
 
 Route::middleware('auth:sanctum')->group(function () {
+    // Deconnexion
+    Route::post('/logout', [AuthController::class, 'logout']);
+
     // Profil
     Route::get('/profile', [ProfileController::class, 'show']);
     Route::post('/profile', [ProfileController::class, 'store']);

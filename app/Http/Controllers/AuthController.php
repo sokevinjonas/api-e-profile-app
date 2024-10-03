@@ -59,4 +59,52 @@ class AuthController extends Controller
             'token_type' => 'Bearer',
         ]);
     }
+    // Méthode pour la connexion
+    public function login(Request $request)
+    {
+        // Validation des champs
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|string|email',
+            'password' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        // Vérifier les informations de l'utilisateur
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            return response()->json(['message' => 'Email ou mot de passe incorrecte!'], 401);
+        }
+
+        // Créer un token d'authentification
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'Bearer',
+            'data' => $user
+        ]);
+    }
+
+    //Pour tester le logout aller dans header commme cle:Authorization et value: Bearer 2|codeTOken
+    public function logout()
+    {
+        $user = auth()->user();
+
+        // Vérifie si l'utilisateur est authentifié
+        if (!$user) {
+            // Retourne une réponse JSON avec un code d'état 401
+            return response()->json(['message' => 'Utilisateur non authentifié'], 401);
+        }
+
+        // Supprime tous les tokens de l'utilisateur authentifié
+        $user->tokens()->delete();
+
+        // Retourne une réponse avec un code d'état 200 (OK)
+        return response()->json(['message' => 'Déconnexion réussie avec succès'], 200);
+    }
+
 }
