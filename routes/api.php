@@ -14,6 +14,8 @@ Route::middleware('auth:sanctum')->group(function () {
     // Profil
     Route::get('/profile', [ProfileController::class, 'show']);
     Route::post('/profile', [ProfileController::class, 'store']);
+    Route::put('/profile', [ProfileController::class, 'update']);
+    Route::delete('/profile', [ProfileController::class, 'destroy']);
 
     // Liens sociaux
     Route::post('/profile/social-links', [SocialLinkController::class, 'store']);
