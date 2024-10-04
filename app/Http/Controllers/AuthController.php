@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Tymon\JWTAuth\Facades\JWTAuth;
+use App\Models\Profile;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -36,6 +37,10 @@ class AuthController extends Controller
             'prenom' => $request->prenom,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+        ]);
+        $profile = Profile::create([
+            'user_id' => $user->id,
+            'bio' => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor",
         ]);
 
         // Retourner une réponse de succès sans générer de token

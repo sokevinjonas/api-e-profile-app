@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
-    public function store(Request $request)
+    public function update(Request $request)
     {
         // Validation des champs
         $validator = Validator::make($request->all(), [
@@ -26,23 +26,26 @@ class ProfileController extends Controller
         // Récupérer l'utilisateur authentifié
         $user = $request->user();
 
-        // Vérifier si un profil existe déjà pour cet utilisateur
-        if ($user->profile) {
+        // Vérifier si un profil existe pour cet utilisateur
+        $profile = $user->profile;
+
+        if (!$profile) {
             return response()->json([
-                'message' => 'Un profil existe déjà pour cet utilisateur.',
-            ], 409); // 409 Conflict
+                'message' => 'Profil non trouvé.',
+            ], 404);
         }
 
-        // Créer le profil si aucun n'existe
-        $profile = Profile::create([
-            'user_id' => $user->id,
+        // Mettre à jour les champs du profil
+        $profile->update([
             'bio' => $request->bio,
         ]);
 
         return response()->json([
-            'data' => $profile,
-        ], 201);
+            'message' => 'Le profil a été mis à jour',
+            'data' => $profile, // Renvoie les données du profil mis à jour
+        ], 200);
     }
+
 
 
     public function show()
@@ -57,87 +60,6 @@ class ProfileController extends Controller
 
         // Retourner le profil avec ses relations
         return response()->json(['data' => $profile], 200);
-    }
-
-    public function update(Request $request)
-    {
-        // Validation des champs
-        $validator = Validator::make($request->all(), [
-            'bio' => 'nullable|string|max:500',
-            'social_links' => 'nullable|array',
-            'social_links.*.id' => 'nullable|exists:social_links,id',
-            'social_links.*.platform' => 'required|string|max:50',
-            'social_links.*.url' => 'required|url',
-            'services' => 'nullable|array',
-            'services.*.id' => 'nullable|exists:services,id',
-            'services.*.titre' => 'required|string|max:100',
-            'services.*.description' => 'nullable|string|max:500',
-            'services.*.price' => 'nullable|integer',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-        }
-
-        // Récupérer le profil de l'utilisateur connecté
-        $profile = auth()->user()->profile;
-
-        // Vérifier si le profil existe
-        if (!$profile) {
-            return response()->json(['message' => 'Profil non trouvé.'], 404);
-        }
-
-        // Mettre à jour le profil
-        $profile->bio = $request->bio;
-        $profile->save();
-
-        // Mettre à jour les liens sociaux
-        if ($request->social_links) {
-            foreach ($request->social_links as $link) {
-                if (isset($link['id'])) {
-                    // Mettre à jour le lien social existant
-                    $socialLink = SocialLink::find($link['id']);
-                    if ($socialLink) {
-                        $socialLink->platform = $link['platform'];
-                        $socialLink->url = $link['url'];
-                        $socialLink->save();
-                    }
-                } else {
-                    // Ajouter un nouveau lien social
-                    SocialLink::create([
-                        'profile_id' => $profile->id,
-                        'platform' => $link['platform'],
-                        'url' => $link['url'],
-                    ]);
-                }
-            }
-        }
-
-        // Mettre à jour les services
-        if ($request->services) {
-            foreach ($request->services as $service) {
-                if (isset($service['id'])) {
-                    // Mettre à jour le service existant
-                    $existingService = Service::find($service['id']);
-                    if ($existingService) {
-                        $existingService->titre = $service['titre'];
-                        $existingService->description = $service['description'];
-                        $existingService->price = $service['price'];
-                        $existingService->save();
-                    }
-                } else {
-                    // Ajouter un nouveau service
-                    Service::create([
-                        'profile_id' => $profile->id,
-                        'titre' => $service['titre'],
-                        'price' => $service['price'],
-                    ]);
-                }
-            }
-        }
-
-        // Retourner le profil mis à jour avec ses relations
-        return response()->json(['data' => $profile->load(['socialLinks', 'services'])], 200);
     }
 
 
