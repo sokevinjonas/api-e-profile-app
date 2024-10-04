@@ -1,6 +1,6 @@
-# E-Profile
+# Naba-Profil
 
-E-Profile est une application web open source permettant aux professionnels de créer et partager facilement leur profil via un lien unique ou un code QR. Les utilisateurs peuvent lier leurs réseaux sociaux, ajouter des services qu'ils proposent et personnaliser leur bio. C'est une solution idéale pour remplacer les cartes de visite classiques par un profil en ligne dynamique et accessible.
+Naba-Profil est une application web open source permettant aux professionnels de créer et partager facilement leur profil via un lien unique ou un code QR. Les utilisateurs peuvent lier leurs réseaux sociaux, ajouter des services qu'ils proposent et personnaliser leur bio. C'est une solution idéale pour remplacer les cartes de visite classiques par un profil en ligne dynamique et accessible.
 
 ## Fonctionnalités
 
@@ -23,8 +23,8 @@ E-Profile est une application web open source permettant aux professionnels de c
 
 1. **Cloner le dépôt** :
     ```bash
-    git clone https://github.com/sokevinjonas/api-e-profile-app.git
-    cd api-e-profile-app
+    git clone https://github.com/sokevinjonas/api-Naba-Profil-app.git
+    cd api-Naba-Profil-app
     ```
 2. **Installer les dépendances PHP** :
 
@@ -76,4 +76,4 @@ Une fois l'application démarrée, vous pouvez accéder aux endpoints API via ht
 
 ### Contribution
 
-E-Profile est un projet open source, et toutes les contributions sont les bienvenues ! Que ce soit pour corriger un bug, ajouter une fonctionnalité ou améliorer la documentation, n'hésitez pas à faire un pull request.
+Naba-Profil est un projet open source, et toutes les contributions sont les bienvenues ! Que ce soit pour corriger un bug, ajouter une fonctionnalité ou améliorer la documentation, n'hésitez pas à faire un pull request.
