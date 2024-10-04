@@ -9,7 +9,7 @@ use App\Http\Controllers\SocialLinkController;
 
 Route::middleware('jwt')->group(function () {
     // Deconnexion
-    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::delete('/logout', [AuthController::class, 'logout']);
 
     // Profil
     Route::get('/profile', [ProfileController::class, 'show']);
@@ -23,6 +23,7 @@ Route::middleware('jwt')->group(function () {
 
     // Services
     Route::post('/services', [ServiceController::class, 'store']);
+    Route::get('/services', [ServiceController::class, 'index']);
     Route::delete('/services/{id}', [ServiceController::class, 'destroy']);
 });
 
