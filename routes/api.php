@@ -23,6 +23,7 @@ Route::middleware('jwt')->group(function () {
 
     // Services
     Route::post('/services', [ServiceController::class, 'store']);
+    Route::put('/services/{id}', [ServiceController::class, 'update']);
     Route::get('/services', [ServiceController::class, 'index']);
     Route::delete('/services/{id}', [ServiceController::class, 'destroy']);
 });
