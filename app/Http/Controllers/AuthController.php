@@ -49,7 +49,7 @@ class AuthController extends Controller
             'user' => $user,
         ], 201);
     }
-    // Méthode pour la connexion
+    // Méthode pour la connexion avec JWT
     public function login(Request $request)
     {
         // Validation des champs

@@ -17,8 +17,9 @@ Route::middleware('jwt')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy']);
 
     // Liens sociaux
-    Route::post('/profile/social-links', [SocialLinkController::class, 'store']);
-    Route::delete('/profile/social-links/{id}', [SocialLinkController::class, 'destroy']);
+    Route::post('/social-links', [SocialLinkController::class, 'store']);
+    Route::get('/social-links', [SocialLinkController::class, 'index']);
+    Route::delete('/social-links/{id}', [SocialLinkController::class, 'destroy']);
 
     // Services
     Route::post('/services', [ServiceController::class, 'store']);

@@ -24,11 +24,11 @@ class ServiceController extends Controller
     {
         // Validation des champs
         $validator = Validator::make($request->all(), [
-            'titre' => 'required|string|max:50',
+            'titre' => 'required|string|max:100',
             'price' => 'nullable|integer',
         ], [
             'titre.required' => 'Le titre du service est requis.',
-            'titre.max' => 'Le titre du service ne doit pas dépasser 50 caractères.',
+            'titre.max' => 'Le titre du service ne doit pas dépasser 100 caractères.',
             'price.integer' => 'Le prix doit être un entier.',
         ]);
 
@@ -62,11 +62,11 @@ class ServiceController extends Controller
     {
         // Validation des champs
         $validator = Validator::make($request->all(), [
-            'titre' => 'required|string|max:50',
+            'titre' => 'required|string|max:100',
             'price' => 'nullable|integer',
         ], [
             'titre.required' => 'Le titre du service est requis.',
-            'titre.max' => 'Le titre du service ne doit pas dépasser 50 caractères.',
+            'titre.max' => 'Le titre du service ne doit pas dépasser 100 caractères.',
             'price.integer' => 'Le prix doit être un entier.',
         ]);
 
